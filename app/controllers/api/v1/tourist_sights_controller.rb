@@ -3,7 +3,7 @@ module Api
     class TouristSightsController < ApplicationController
       def index
         tourist_sights = TouristSightsFacade.sights(params[:country])
-        render json: TouristSightsSerializer.new(tourist_sights)
+        render json: TouristSightSerializer.new(tourist_sights)
       end
     end
   end

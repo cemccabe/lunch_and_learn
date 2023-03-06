@@ -1,4 +1,4 @@
 class TouristSightSerializer
   include JSONAPI::Serializer
-  attributes :id, :type, :name, :address, :place_id
+  attributes :id, :name, :address, :place_id
 end
