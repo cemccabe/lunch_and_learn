@@ -8,7 +8,7 @@ RSpec.describe CountryService do
       expect(response).to be_a(Hash)
       
       expect(response).to have_key(:name)
-      expect(response[:name]).to have_key[:common]
+      expect(response[:name]).to have_key(:common)
       expect(response[:name][:common]).to be_a(String)
     end
   end
