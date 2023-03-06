@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe TouristSight do
   it 'exists' do
+
     data = {:type=>"Feature",
       :properties=>
        {:name=>"Hôtel de la Marine",
@@ -50,6 +51,7 @@ RSpec.describe TouristSight do
         :place_id=>"51388772e2a895024059b124d037f76e4840f00101f901d62f10000000000092031348c3b474656c206465206c61204d6172696e65"},
       :geometry=>{:type=>"Point", :coordinates=>[2.3230760279847367, 48.86691949523209]}}
 
+      
     sight = TouristSight.new(data)
 
     expect(sight).to be_a(TouristSight)

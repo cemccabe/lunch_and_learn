@@ -1,5 +1,5 @@
 class PlacesService
-  def self.tourism_sights(country)
+  def self.tourist_sights(country)
     country_data = Country.new(CountryService.lat_long(country))
 
     conn = Faraday.new(url: 'https://api.geoapify.com')

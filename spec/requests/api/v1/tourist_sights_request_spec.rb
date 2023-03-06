@@ -5,11 +5,11 @@ describe 'Tourist sights request', type: :request do
     get '/api/v1/tourist_sights?country=France'
     expect(response).to be_successful
     
-    tourist_sights = JSON.parse(response.body, symbolize_names: true)[:data]
+    tourist_sights = JSON.parse(response.body, symbolize_names: true)
+    # binding.pry
+    expect(tourist_sights).to be_a(Hash)
 
-    expect(tourist_sights).to be_an(Array)
-    
-    tourist_sights.each do |sight|
+    tourist_sights[:data].each do |sight|
       expect(sight[:id]).to eq(nil)
       expect(sight[:type]).to eq('tourist_sight')
       expect(sight[:attributes]).to be_a(Hash)

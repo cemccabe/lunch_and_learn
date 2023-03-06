@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Country do
   it 'exists' do
+
     data = {
       "name": {
           "common": "France",
@@ -233,6 +234,7 @@ RSpec.describe Country do
       }
     }
 
+    
     country = Country.new(data)
 
     expect(country).to be_a(Country)
