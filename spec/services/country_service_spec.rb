@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CountryService do
   describe '#random_country' do
-    xit 'returns a random country' do
+    it 'returns a random country' do
       response = CountryService.random_country
       
       expect(response).to be_a(Hash)
