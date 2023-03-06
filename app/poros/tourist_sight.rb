@@ -4,8 +4,9 @@ class TouristSight
   def initialize(data)
     @id = nil
     @type = 'tourist_sight'
-    @name = [data][:features].first[:properties][:name]
-    @address = "#{[data][:features].first[:properties][:address_line1]}, #{[data][:features].first[:properties][:address_line2]}"
-    @place_id = [data][:features].first[:properties][:place_id]
+    binding.pry
+    @name = [data][:name]
+    @address = "#{[data][:properties][:address_line1]}, #{[data][:properties][:address_line2]}"
+    @place_id = [data][:properties][:place_id]
   end
 end
