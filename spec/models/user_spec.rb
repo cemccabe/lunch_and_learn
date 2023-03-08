@@ -13,7 +13,7 @@ RSpec.describe User do
     it 'creates a 32 digit hex string' do
       user = User.new(name: 'Test Name', email: 'test@gmail.com')
       expect(user.api_key).to eq(nil)
-
+      
       user.create_api_key
       expect(user.api_key).to be_a(String)
       expect(user.api_key.chars.count).to eq(32)
