@@ -108,4 +108,16 @@ RSpec.describe 'Favorites requests' do
     expect(favorites).to have_key(:data)
     expect(favorites[:data].count).to eq(0)
   end
+
+  it 'returns an error message if API key is invalid' do
+    user = User.create!(name: 'Test Name', email: 'test@gmail.com', api_key: 'jgn983hy48thw9begh98h4539h4')
+
+    get '/api/v1/favorites?api_key=0000000000000000'
+
+    expect(response).to_not be_successful
+    expect(response.status).to eq(404)
+
+    message = JSON.parse(response.body, symbolize_names: true)
+    expect(message[:errors]).to eq('Not a valid API key - no matching user')
+  end
 end
