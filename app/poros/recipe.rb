@@ -6,6 +6,6 @@ class Recipe
     @title = data[:label]
     @url = data[:url]
     @image = data[:image]
-    @country = country
+    @country = country.downcase
   end
 end

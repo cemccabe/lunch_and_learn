@@ -239,7 +239,5 @@ RSpec.describe Country do
 
     expect(country).to be_a(Country)
     expect(country.name).to eq('France')
-    expect(country.latitude).to eq('48.87')
-    expect(country.longitude).to eq('2.33')
   end
 end

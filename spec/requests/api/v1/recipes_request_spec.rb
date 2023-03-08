@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Recipe requests' do
   it 'returns recipe with country query entered' do
-    get '/api/v1/recipes?country=thailand'
+    get '/api/v1/recipes?country=Thailand'
     expect(response).to be_successful
 
     recipes = JSON.parse(response.body, symbolize_names: true)
