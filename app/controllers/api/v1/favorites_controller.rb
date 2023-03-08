@@ -3,11 +3,14 @@ module Api
     class FavoritesController < ApplicationController
       def create
         # binding.pry
-        user = User.find_by(api_key: params[:api_key])
-        favorite = user.favorites.new(favorite_params)
+        if user = User.find_by(api_key: params[:api_key])
+          favorite = user.favorites.new(favorite_params)
 
-        if favorite.save
-          render json: {success: 'Favorite added successfully'}, status: 201
+          if favorite.save
+            render json: {success: 'Favorite added successfully'}, status: 201
+          end
+        else
+          render json: {errors: 'Not a valid API key - no matching user'}, status: 404
         end
       end
 
