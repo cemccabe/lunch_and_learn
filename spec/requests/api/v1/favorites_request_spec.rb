@@ -42,4 +42,18 @@ RSpec.describe 'Favorites requests' do
     message = JSON.parse(response.body, symbolize_names: true)
     expect(message[:errors]).to eq('Not a valid API key - no matching user')
   end
+
+  it 'returns a list of a users favorites' do
+    user = User.create!(name: 'Test Name', email: 'test@gmail.com', api_key: 'jgn983hy48thw9begh98h4539h4')
+
+    Favorite.create!(country: 'Laos', recipe_title: 'Chicken', recipe_link: 'chicken.com', user: user)
+    Favorite.create!(country: 'Thailand', recipe_title: 'Beef', recipe_link: 'beef.com', user: user)
+    Favorite.create!(country: 'France', recipe_title: 'Pork', recipe_link: 'pork.com', user: user)
+
+    expect(user.favorites.count).to eq(3)
+
+    get "/api/v1/favorites?api_key=#{user.api_key}"
+
+    expect(response).to be_successful
+  end
 end
