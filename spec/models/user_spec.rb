@@ -9,6 +9,10 @@ RSpec.describe User do
     it {should validate_uniqueness_of :api_key}
   end
 
+  describe 'relationships' do
+    it {should have_many :favorites}
+  end
+
   describe '#create_api_key' do
     it 'creates a 32 digit hex string' do
       user = User.new(name: 'Test Name', email: 'test@gmail.com')
