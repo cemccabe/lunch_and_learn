@@ -26,3 +26,4 @@ RSpec.describe ImageService do
       expect(response[:results][0][:urls][:raw]).to be_a(String)
     end
   end
+end
