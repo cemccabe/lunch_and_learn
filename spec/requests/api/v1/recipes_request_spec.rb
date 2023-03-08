@@ -1,6 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe 'Recipe requests' do
+  before(:each) do
+    stub_request(:get, "https://api.edamam.com/api/recipes/v2?app_id=#{ENV['app_id']}&app_key=#{ENV['app_key']}&q=Djibouti&type=public").
+      to_return(status: 200, body: File.read('./spec/fixtures/djibouti_response.json'), headers: {})
+
+    stub_request(:get, "https://api.edamam.com/api/recipes/v2?app_id=#{ENV['app_id']}&app_key=#{ENV['app_key']}&q=&type=public").
+      to_return(status: 200, body: File.read('./spec/fixtures/empty_query_response.json'), headers: {})
+
+    stub_request(:get, "https://restcountries.com/v3.1/all?fields=name").
+      to_return(status: 200, body: File.read('./spec/fixtures/countries_response.json'), headers: {})
+
+    stub_request(:get, "https://api.edamam.com/api/recipes/v2?app_id=#{ENV['app_id']}&app_key=#{ENV['app_key']}&q=Thailand&type=public").
+      to_return(status: 200, body: File.read('./spec/fixtures/thailand_recipe_response.json'), headers: {})
+  end
+
   it 'returns recipe with country query entered' do
     get '/api/v1/recipes?country=Thailand'
     expect(response).to be_successful
@@ -25,6 +39,8 @@ RSpec.describe 'Recipe requests' do
   end
 
   it 'returns recipes of a random country if no country query entered' do
+    WebMock.allow_net_connect!
+    
     get '/api/v1/recipes'
     expect(response).to be_successful
 
