@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe ImageService do
+  before(:each) do
+    stub_request(:get, "https://api.unsplash.com/search/photos?client_id=#{ENV['client_id']}&query=Laos").
+      to_return(status: 200, body: File.read('./spec/fixtures/laos_image_response.json'), headers: {})
+  end
+
   describe '#search_images' do
     it 'returns image data' do
       response = ImageService.search_images('Laos')
