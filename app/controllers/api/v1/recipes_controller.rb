@@ -7,7 +7,6 @@ module Api
         else
           random_country = Country.new(CountryService.random_country)
           recipes = RecipesFacade.recipes(random_country.name)
-          binding.pry
         end
 
         render json: RecipeSerializer.new(recipes)
