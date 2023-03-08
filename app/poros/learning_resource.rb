@@ -10,9 +10,10 @@ class LearningResource
 
   def video_parse(video_data)
     if video_data
+    video = Video.new(video_data)
       {
-        title: video_data.title,
-        youtube_video_id: video_data.youtube_video_id
+        title: video.title,
+        youtube_video_id: video.youtube_video_id
       }
     else
       {}
