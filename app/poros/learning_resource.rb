@@ -9,27 +9,18 @@ class LearningResource
   end
 
   def video_parse(video_data)
-    if video_data
-    video = Video.new(video_data)
-      {
-        title: video.title,
-        youtube_video_id: video.youtube_video_id
-      }
-    else
-      {}
-    end
+    {
+      title: video_data.title,
+      youtube_video_id: video_data.youtube_video_id
+    }
   end
 
   def images_parse(image_data)
-    if image_data
-      image_data.map do |image|
-        {
-          alt_tag: image.alt_tag,
-          url: image.url
-        }
-      end
-    else
-      []
+    image_data.map do |image|
+      {
+        alt_tag: image.alt_tag,
+        url: image.url
+      }
     end
   end
 end
