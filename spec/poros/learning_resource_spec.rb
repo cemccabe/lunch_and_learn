@@ -80,7 +80,8 @@ RSpec.describe LearningResource do
     ]
 
     country = 'Laos'
-    learning_resource = LearningResource.new(country, video_data, image_data)
+    video = Video.new(video_data)
+    learning_resource = LearningResource.new(country, video, image_data)
 
     expect(learning_resource).to be_a(LearningResource)
     expect(learning_resource.video).to be_a(Hash)
