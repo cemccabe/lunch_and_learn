@@ -38,4 +38,13 @@ RSpec.describe 'User requests' do
     expect(user.email).to eq(user_response[:data][:attributes][:email])
     expect(user.api_key).to eq(user_response[:data][:attributes][:api_key])
   end
+
+  it 'returns an error message if an email address is not unique' do
+    post '/api/v1/users', params: {user: {name: 'test1', email: 'test@gmail.com'}}
+    post '/api/v1/users', params: {user: {name: 'test2', email: 'test@gmail.com'}}
+
+    expect(response).to_not be_successful
+    expect(response.status).to eq(400)
+    expect(response.body).to include('Email has already been taken')
+  end
 end
