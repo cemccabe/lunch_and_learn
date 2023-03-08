@@ -67,10 +67,10 @@ RSpec.describe 'Favorites requests' do
     expect(favorites[:data][0]).to be_a(Hash)
 
     expect(favorites[:data][0]).to have_key(:id)
-    expect(favorites[:data][0]).to be_a(String)
+    expect(favorites[:data][0][:id]).to be_a(String)
 
     expect(favorites[:data][0]).to have_key(:type)
-    expect(favorites[:data][0]).to be_a(String)
+    expect(favorites[:data][0][:type]).to be_a(String)
     expect(favorites[:data][0][:type]).to eq('favorite')
 
     expect(favorites[:data][0]).to have_key(:attributes)
@@ -90,5 +90,22 @@ RSpec.describe 'Favorites requests' do
 
     expect(favorites[:data][0][:attributes]).to_not have_key(:user_id)
     expect(favorites[:data][0][:attributes]).to_not have_key(:updated_at)
+  end
+
+  it 'returns empty array if user does not have any favorites' do
+    user = User.create!(name: 'Test Name', email: 'test@gmail.com', api_key: 'jgn983hy48thw9begh98h4539h4')
+    
+    expect(user.favorites.count).to eq(0)
+
+    get "/api/v1/favorites?api_key=#{user.api_key}"
+
+    expect(response).to be_successful
+
+    favorites = JSON.parse(response.body, symbolize_names: true)
+
+    expect(favorites).to be_a(Hash)
+
+    expect(favorites).to have_key(:data)
+    expect(favorites[:data].count).to eq(0)
   end
 end
