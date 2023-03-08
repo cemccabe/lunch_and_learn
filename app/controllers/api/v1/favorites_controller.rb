@@ -2,12 +2,14 @@ module Api
   module V1
     class FavoritesController < ApplicationController
       def index
-        user = User.find_by(api_key: params[:api_key])
-        render json: FavoriteSerializer.new(user.favorites)
+        if user = User.find_by(api_key: params[:api_key])
+          render json: FavoriteSerializer.new(user.favorites)
+        else
+          render json: {errors: 'Not a valid API key - no matching user'}, status: 404
+        end
       end
 
       def create
-        # binding.pry
         if user = User.find_by(api_key: params[:api_key])
           favorite = user.favorites.new(favorite_params)
 
