@@ -1,6 +1,10 @@
 module Api
   module V1
     class FavoritesController < ApplicationController
+      def index
+        
+      end
+
       def create
         # binding.pry
         if user = User.find_by(api_key: params[:api_key])
